@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brasileiros comuns relatam ganhos musculares fora do padrão — o motivo intriga até veteranos de academia</title>
+<style>
+  :root{
+    --paper:#f7f4ee;
+    --ink:#1b1812;
+    --ink-soft:#4a443a;
+    --rule:#1b1812;
+    --accent:#9c3b2e;
+    --accent-soft:#e7d9ce;
+    --tag-bg:#1b1812;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Georgia","Iowan Old Style", "Times New Roman", serif;
+    line-height:1.6;
+  }
+  .masthead{
+    border-bottom:3px double var(--ink);
+    padding:14px 20px 10px;
+    text-align:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .masthead .kicker{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .masthead .titlebar{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.02em;
+    margin-top:6px;
+  }
+  .masthead .meta-row{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--ink-soft);
+    padding-top:6px;
+  }
+  .sponsor-tag{
+    display:inline-block;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    background:var(--tag-bg);
+    color:var(--paper);
+    padding:3px 10px;
+    border-radius:2px;
+    margin:18px auto 0;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:24px 20px 80px;
+  }
+  .sponsor-row{ text-align:center; }
+  h1.headline{
+    font-size:38px;
+    line-height:1.15;
+    margin:18px 0 10px;
+    font-weight:700;
+    letter-spacing:-.01em;
+  }
+  p.dek{
+    font-size:19px;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin:0 0 18px;
+    border-left:3px solid var(--accent);
+    padding-left:14px;
+  }
+  .byline{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    border-top:1px solid var(--ink-soft);
+    border-bottom:1px solid var(--ink-soft);
+    padding:8px 0;
+    margin-bottom:22px;
+    display:flex;
+    justify-content:space-between;
+  }
+  .lede{
+    font-size:18px;
+  }
+  .lede::first-letter{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:64px;
+    font-weight:800;
+    float:left;
+    line-height:.8;
+    margin:6px 8px 0 0;
+    color:var(--accent);
+  }
+  article p{
+    font-size:17.5px;
+    margin:0 0 18px;
+  }
+  h2.section{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--accent);
+    border-bottom:2px solid var(--ink);
+    padding-bottom:6px;
+    margin:38px 0 16px;
+  }
+  blockquote{
+    font-size:20px;
+    font-style:italic;
+    margin:24px 0;
+    padding:6px 0 6px 22px;
+    border-left:3px solid var(--accent);
+    color:var(--ink);
+  }
+  blockquote cite{
+    display:block;
+    font-style:normal;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    letter-spacing:.04em;
+  }
+  .testimonial-box{
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    padding:16px 18px;
+    margin:18px 0;
+    font-size:16.5px;
+  }
+  .testimonial-box .who{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:12px;
+    font-weight:700;
+    color:var(--ink-soft);
+    margin-top:10px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .placeholder{
+    border:2px dashed #b3a690;
+    background:#efe9dd;
+    color:var(--ink-soft);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size:13px;
+    text-align:center;
+    padding:18px;
+    border-radius:4px;
+    margin:16px 0;
+  }
+  .print-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:18px 0;
+  }
+  .print-grid .placeholder{ margin:0; padding:30px 10px; font-size:11px;}
+  .pull-stat{
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+    margin:34px 0;
+    padding:20px;
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+  }
+  .pull-stat .num{
+    font-size:44px;
+    font-weight:800;
+    color:var(--accent);
+    display:block;
+  }
+  .pull-stat .label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+  }
+  .cta-block{
+    text-align:center;
+    margin:46px 0 20px;
+    padding:30px 20px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:6px;
+  }
+  .cta-block p{
+    color:var(--paper);
+    font-size:16px;
+    margin-bottom:18px;
+  }
+  .cta-button{
+    display:inline-block;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.03em;
+    text-decoration:none;
+    padding:16px 34px;
+    border-radius:4px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .cta-button:hover{
+    background:#b8483a;
+    transform:translateY(-1px);
+  }
+  .disclaimer{
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    font-size:11px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--ink-soft);
+    padding-top:14px;
+    margin-top:40px;
+    line-height:1.5;
+  }
+  .editor-note{
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    font-size:12px;
+    background:#fff4cc;
+    border:1px solid #d8c277;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:14px 0;
+    color:#5c4a12;
+  }
+  @media (max-width:560px){
+    h1.headline{font-size:28px;}
+    .masthead .titlebar{font-size:21px;}
+    .print-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">Saúde · Performance · Bem-estar</div>
+  <div class="titlebar">JORNAL VIDA ATIVA</div>
+  <div class="meta-row">
+    <span>Edição Digital</span>
+    <span>Seção: Suplementação</span>
+  </div>
+</div>
+
+<div class="sponsor-row"><span class="sponsor-tag">Conteúdo Patrocinado</span></div>
+
+<div class="wrap">
+  <h1 class="headline">Brasileiros comuns relatam ganhos de massa muscular fora do padrão — e o motivo intriga até quem treina há anos</h1>
+  <p class="dek">Um produto criado para suporte de atletas chegou ao mercado nacional, e o relato de quem já experimentou virou assunto em grupos de academia pelo país.</p>
+
+  <div class="byline">
+    <span>Por Redação Vida Ativa</span>
+    <span>Atualizado em [DATA] · Leitura de 4 min</span>
+  </div>
+
+  <article>
+    <p class="lede">Quem frequenta academia conhece a sensação: treinar pesado, comer certo, dormir as horas recomendadas — e ainda assim ver o resultado andar mais devagar do que deveria. Para boa parte dos brasileiros que treinam regularmente, esse é o maior ponto de frustração na busca por um físico mais forte e definido.</p>
+
+    <p>Foi justamente esse gargalo que motivou o desenvolvimento de fórmulas de suporte muscular mais avançadas, usadas há anos por atletas em países como Estados Unidos e Alemanha — e que agora chegam ao Brasil através do Laboratório Ghmuscle, com o lançamento do <strong>Ghdrol</strong>.</p>
+
+    <h2 class="section">O que está por trás do produto</h2>
+
+    <p>O Ghdrol é apresentado pelo fabricante como um suplemento concentrado, desenvolvido para apoiar três pilares do desempenho físico: força e resistência no treino, recuperação muscular e composição corporal.</p>
+
+    <div class="editor-note">
+      ✏️ <strong>Nota para edição:</strong> substituir o parágrafo abaixo pelos ativos reais da fórmula (conforme rótulo) e a função de cada um. É o trecho que dá credibilidade técnica ao texto — não deixar genérico.
+    </div>
+
+    <p class="placeholder">[CONFIRMAR COM RÓTULO: lista dos ativos reais da fórmula + função de cada um, em linguagem acessível]</p>
+
+    <blockquote>
+      "A diferença que as pessoas mais relatam não é só estética. É a disposição no dia a dia e a recuperação entre um treino e outro."
+      <cite>— [Citação real e autorizada da equipe técnica do laboratório, ou remover este bloco se não houver]</cite>
+    </blockquote>
+
+    <div class="pull-stat">
+      <span class="num">2–3</span>
+      <span class="label">semanas até os primeiros sinais relatados pelos usuários</span>
+    </div>
+
+    <h2 class="section">O que dizem os primeiros usuários</h2>
+
+    <div class="testimonial-box">
+      [DEPOIMENTO REAL #1 — texto completo do cliente]
+      <div class="who">— Nome/iniciais reais, com autorização</div>
+    </div>
+
+    <div class="testimonial-box">
+      [DEPOIMENTO REAL #2 — texto completo do cliente]
+      <div class="who">— Nome/iniciais reais, com autorização</div>
+    </div>
+
+    <div class="testimonial-box">
+      [DEPOIMENTO REAL #3 — idealmente o relato de alguém iniciante na academia]
+      <div class="who">— Nome/iniciais reais, com autorização</div>
+    </div>
+
+    <p>Os relatos circulam principalmente em grupos de WhatsApp e Instagram voltados para o público fitness — alguns deles reproduzidos abaixo, com autorização dos clientes.</p>
+
+    <div class="print-grid">
+      <div class="placeholder">[PRINT WHATSAPP #1]</div>
+      <div class="placeholder">[PRINT WHATSAPP #2]</div>
+      <div class="placeholder">[PRINT WHATSAPP #3]</div>
+      <div class="placeholder">[PRINT WHATSAPP #4]</div>
+      <div class="placeholder">[PRINT WHATSAPP #5]</div>
+      <div class="placeholder">[PRINT WHATSAPP #6]</div>
+    </div>
+
+    <h2 class="section">Por que está esgotando</h2>
+
+    <p>Segundo o laboratório, a procura cresceu rapidamente desde o lançamento, o que tem gerado períodos de estoque limitado — em parte pela demanda recente, em parte pela produção em lotes controlados.</p>
+
+    <div class="editor-note">
+      ✏️ <strong>Nota para edição:</strong> usar este parágrafo apenas se o estoque limitado for real. Escassez falsa é prática enganosa e pode gerar problema com Procon/CONAR.
+    </div>
+
+    <h2 class="section">Como ter acesso</h2>
+
+    <p>O Ghdrol não é vendido em farmácias ou lojas físicas — apenas diretamente pelo site oficial do fabricante, com garantia de satisfação de 60 dias.</p>
+  </article>
+
+  <div class="cta-block">
+    <p>Conheça a fórmula que está sendo comentada em academias por todo o Brasil.</p>
+    <a href="#" class="cta-button">QUERO CONHECER O GHDROL →</a>
+  </div>
+
+  <div class="disclaimer">
+    Este conteúdo tem caráter informativo e publicitário, produzido em parceria comercial com o anunciante. Resultados individuais podem variar. Consulte um profissional de saúde antes de iniciar o uso de qualquer suplemento alimentar.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghdrol — Suporte muscular avançado | Laboratório Ghmuscle</title>
+<style>
+  :root{
+    --paper:#f7f4ee;
+    --paper-dark:#efe8d8;
+    --ink:#1b1812;
+    --ink-soft:#4a443a;
+    --accent:#9c3b2e;
+    --accent-2:#c9892f;
+    --accent-soft:#e7d9ce;
+    --ok:#3c6e4f;
+  }
+  *{box-sizing:border-box;}
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 20px; }
+
+  /* reveal-on-scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-stagger > *{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal-stagger.in > *{ opacity:1; transform:translateY(0); }
+  .reveal-stagger.in > *:nth-child(1){ transition-delay:.05s; }
+  .reveal-stagger.in > *:nth-child(2){ transition-delay:.15s; }
+  .reveal-stagger.in > *:nth-child(3){ transition-delay:.25s; }
+  .reveal-stagger.in > *:nth-child(4){ transition-delay:.35s; }
+  .reveal-stagger.in > *:nth-child(5){ transition-delay:.45s; }
+  .reveal-stagger.in > *:nth-child(6){ transition-delay:.55s; }
+
+  /* TOPBAR */
+  .topbar{
+    background:var(--ink);
+    color:var(--paper);
+    text-align:center;
+    font-size:13px;
+    padding:9px 12px;
+    letter-spacing:.02em;
+    position:relative;
+    z-index:50;
+  }
+  .topbar strong{ color:#e8b9ac; }
+
+  /* STICKY CTA */
+  .sticky-cta{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    background:var(--ink);
+    color:#fff;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    transform:translateY(110%);
+    transition:transform .35s ease;
+    z-index:100;
+    box-shadow:0 -6px 24px rgba(0,0,0,.25);
+  }
+  .sticky-cta.show{ transform:translateY(0); }
+  .sticky-cta .info{ font-size:13px; }
+  .sticky-cta .info b{ display:block; font-size:15px; }
+  .sticky-cta a{
+    background:var(--accent);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:13.5px;
+    padding:11px 20px;
+    border-radius:5px;
+    white-space:nowrap;
+  }
+
+  /* HERO */
+  .hero{
+    padding:54px 0 36px;
+    text-align:center;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(156,59,46,.08), transparent 60%),
+      var(--paper);
+  }
+  .hero .eyebrow{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:44px;
+    line-height:1.16;
+    margin:0 0 14px;
+    font-weight:700;
+  }
+  .hero h1 em{
+    color:var(--accent);
+    font-style:normal;
+    position:relative;
+    white-space:nowrap;
+  }
+  .hero h1 em::after{
+    content:"";
+    position:absolute;
+    left:-2px; right:-2px; bottom:2px;
+    height:10px;
+    background:var(--accent-soft);
+    z-index:-1;
+    border-radius:3px;
+  }
+  .hero p.sub{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto 30px;
+  }
+
+  /* 3D PRODUCT STAGE */
+  .stage{
+    perspective:1100px;
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
+  }
+  .jar{
+    width:140px;
+    height:200px;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:spin 9s linear infinite;
+  }
+  @keyframes spin{
+    from{ transform:rotateY(0deg) rotateX(6deg); }
+    to{ transform:rotateY(360deg) rotateX(6deg); }
+  }
+  .jar .face{
+    position:absolute;
+    top:0; left:0;
+    width:140px; height:200px;
+    border-radius:14px;
+    background:linear-gradient(160deg,#2b2620,#1b1812 60%);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.04);
+    backface-visibility:hidden;
+  }
+  .jar .face span{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    color:var(--accent-2);
+    font-family:Georgia, serif;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:.04em;
+  }
+  .jar .face small{
+    position:absolute;
+    bottom:18px; left:50%;
+    transform:translateX(-50%);
+    color:#cfc8b8;
+    font-size:9px;
+    letter-spacing:.12em;
+  }
+  .jar .f1{ transform:rotateY(0deg) translateZ(40px); }
+  .jar .f2{ transform:rotateY(90deg) translateZ(40px); background:linear-gradient(160deg,#231f1a,#15120e 60%); }
+  .jar .f3{ transform:rotateY(180deg) translateZ(40px); }
+  .jar .f4{ transform:rotateY(270deg) translateZ(40px); background:linear-gradient(160deg,#231f1a,#15120e 60%); }
+  .jar .cap{
+    position:absolute;
+    top:-22px; left:10px;
+    width:120px; height:28px;
+    border-radius:8px;
+    background:linear-gradient(160deg,var(--accent),#7a2c21);
+    transform:translateZ(20px) rotateX(90deg);
+    transform-origin:bottom;
+  }
+  .jar-shadow{
+    width:120px; height:18px;
+    margin:-14px auto 0;
+    border-radius:50%;
+    background:radial-gradient(ellipse, rgba(0,0,0,.22), transparent 70%);
+    animation:shadow-pulse 9s linear infinite;
+  }
+  @keyframes shadow-pulse{
+    0%,100%{ transform:scale(1); opacity:.5; }
+    50%{ transform:scale(.85); opacity:.3; }
+  }
+  .photo-note{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+
+  .trust-row{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:30px;
+  }
+  .trust-row span{ display:flex; align-items:center; gap:6px; }
+  .trust-row .dot{ color:var(--ok); font-weight:800; }
+
+  .cta-button{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.02em;
+    text-decoration:none;
+    padding:18px 38px;
+    border-radius:5px;
+    box-shadow:0 6px 18px rgba(156,59,46,.28);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-button:hover{ background:#b8483a; transform:translateY(-2px); box-shadow:0 10px 26px rgba(156,59,46,.36); }
+  .cta-button:active{ transform:translateY(0); }
+  .cta-button::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:40%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+    transform:skewX(-20deg);
+    animation:shine 3.2s ease-in-out infinite;
+  }
+  @keyframes shine{
+    0%{ left:-60%; }
+    45%{ left:130%; }
+    100%{ left:130%; }
+  }
+  .cta-sub{ font-size:12px; color:var(--ink-soft); margin-top:10px; }
+
+  .stars{ color:var(--accent-2); font-size:15px; margin-bottom:6px;}
+  .rating-note{ font-size:13px; color:var(--ink-soft); }
+
+  /* SECTION COMMON */
+  section{ padding:60px 0; border-top:1px solid #e3dccc; }
+  .section-title{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:30px;
+    text-align:center;
+    margin:0 0 36px;
+    font-weight:700;
+  }
+
+  /* COUNTERS */
+  .counters{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .counter-card{
+    background:#fff;
+    border:1px solid #e3dccc;
+    border-radius:10px;
+    padding:24px 10px;
+  }
+  .counter-num{
+    font-family:Georgia, serif;
+    font-size:34px;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .counter-label{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
+
+  /* DOR */
+  .pain-list{ list-style:none; padding:0; margin:0 auto; max-width:560px; }
+  .pain-list li{
+    padding:13px 0 13px 30px;
+    position:relative;
+    font-size:17px;
+    border-bottom:1px solid #e3dccc;
+    transition:transform .2s ease;
+  }
+  .pain-list li:hover{ transform:translateX(4px); }
+  .pain-list li:before{
+    content:"✕";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+    font-weight:800;
+  }
+  .pain-callout{
+    text-align:center;
+    max-width:600px;
+    margin:30px auto 0;
+    font-size:18px;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+  .pain-callout strong{ color:var(--ink); font-style:normal; }
+
+  /* MECANISMO */
+  .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; perspective:900px; }
+  .pillar{
+    background:#fff;
+    border:1px solid #e3dccc;
+    border-radius:8px;
+    padding:26px 20px;
+    text-align:center;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .pillar:hover{
+    transform:rotateX(4deg) rotateY(-4deg) translateY(-4px);
+    box-shadow:0 16px 30px rgba(27,24,18,.12);
+  }
+  .pillar .n{ font-family:Georgia, serif; font-size:13px; color:var(--accent); letter-spacing:.1em; margin-bottom:10px; }
+  .pillar h3{ font-size:17px; margin:0 0 10px; }
+  .pillar p{ font-size:14.5px; color:var(--ink-soft); margin:0; }
+
+  .editor-note{
+    font-size:12px;
+    background:#fff4cc;
+    border:1px solid #d8c277;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:18px 0;
+    color:#5c4a12;
+  }
+  .placeholder-inline{
+    border:2px dashed #b3a690;
+    background:#efe9dd;
+    color:var(--ink-soft);
+    font-size:13px;
+    text-align:center;
+    padding:16px;
+    border-radius:4px;
+    margin:12px 0;
+  }
+
+  /* DEPOIMENTOS */
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; perspective:900px; }
+  .testi-card{
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    padding:18px;
+    border-radius:4px;
+    font-size:14.5px;
+    transition:transform .25s ease;
+  }
+  .testi-card:hover{ transform:translateY(-6px); }
+  .testi-card .who{ font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); margin-top:10px; }
+  .print-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:24px; }
+  .print-grid .placeholder-inline{ padding:34px 8px; font-size:11px; margin:0; }
+
+  /* OFERTA */
+  .countdown-bar{
+    text-align:center;
+    background:var(--accent);
+    color:#fff;
+    border-radius:8px;
+    padding:14px 18px;
+    margin-bottom:28px;
+    font-size:14px;
+  }
+  .countdown-bar b{ font-variant-numeric:tabular-nums; font-size:16px; }
+
+  .pricing-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .price-card{
+    background:#fff;
+    border:1px solid #e3dccc;
+    border-radius:8px;
+    padding:20px 14px;
+    text-align:center;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .price-card:hover{ transform:translateY(-4px); box-shadow:0 14px 26px rgba(27,24,18,.1); }
+  .price-card.featured{ border:2px solid var(--accent); transform:scale(1.05); }
+  .price-card.featured:hover{ transform:scale(1.05) translateY(-4px); }
+  .price-card .badge{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--accent); color:#fff; font-size:10.5px; font-weight:700;
+    letter-spacing:.05em; text-transform:uppercase; padding:4px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .price-card .qty{ font-size:13px; color:var(--ink-soft); margin-bottom:8px;}
+  .price-card .price{ font-size:24px; font-weight:800; margin-bottom:4px;}
+  .price-card .save{ font-size:11.5px; color:var(--ok); margin-bottom:14px;}
+  .price-card .mini-cta{
+    display:block; background:var(--ink); color:#fff; text-decoration:none;
+    font-size:12.5px; font-weight:700; padding:10px; border-radius:4px; transition:background .15s ease;
+  }
+  .price-card .mini-cta:hover{ background:var(--accent); }
+  .price-card.featured .mini-cta{ background:var(--accent); }
+  .scarcity-note{ text-align:center; font-size:13px; color:var(--accent); margin-top:24px; font-weight:600; }
+
+  /* GARANTIA */
+  .guarantee{
+    text-align:center; background:#fff; border:1px solid #e3dccc; border-radius:10px;
+    padding:44px 24px; max-width:600px; margin:0 auto;
+  }
+  .guarantee .seal{
+    width:74px; height:74px; border-radius:50%; border:3px solid var(--ok); color:var(--ok);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+    font-size:26px; font-weight:800;
+    animation:pop-in .6s ease both;
+  }
+  .guarantee.in .seal{ animation:pop-in .6s ease; }
+  @keyframes pop-in{ 0%{ transform:scale(.6); opacity:0;} 70%{ transform:scale(1.08); opacity:1;} 100%{ transform:scale(1);} }
+  .guarantee h3{ font-size:22px; margin:0 0 12px; }
+  .guarantee p{ font-size:15px; color:var(--ink-soft); margin:0; }
+
+  /* FAQ */
+  .faq-item{ border-bottom:1px solid #e3dccc; }
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:18px 30px 18px 0; font-size:16.5px; font-family:inherit; color:var(--ink);
+    position:relative; font-weight:600;
+  }
+  .faq-q::after{
+    content:"+"; position:absolute; right:0; top:16px; font-size:22px; color:var(--accent);
+    transition:transform .25s ease;
+  }
+  .faq-item.open .faq-q::after{ transform:rotate(45deg); }
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s ease;
+    font-size:14.5px; color:var(--ink-soft);
+  }
+  .faq-item.open .faq-a{ max-height:240px; padding-bottom:18px; }
+
+  /* CTA FINAL */
+  .final-cta{
+    background:var(--ink); color:var(--paper); text-align:center; padding:60px 20px; border-radius:10px;
+    position:relative; overflow:hidden;
+  }
+  .final-cta::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(156,59,46,.25), transparent 50%);
+  }
+  .final-cta > *{ position:relative; }
+  .final-cta h2{ font-family:Georgia, serif; font-size:28px; margin:0 0 18px; }
+  .final-cta .trust-row span{ color:#cfc8b8; }
+
+  footer{ text-align:center; font-size:12px; color:var(--ink-soft); padding:30px 20px 90px; }
+
+  @media (max-width:760px){
+    .hero h1{ font-size:30px; }
+    .pillars{ grid-template-columns:1fr; }
+    .testi-grid{ grid-template-columns:1fr; }
+    .pricing-grid{ grid-template-columns:1fr 1fr; }
+    .price-card.featured{ transform:none; }
+    .price-card.featured:hover{ transform:translateY(-4px); }
+    .print-grid{ grid-template-columns:repeat(2,1fr); }
+    .counters{ grid-template-columns:1fr; }
+    .sticky-cta{ flex-direction:column; gap:8px; text-align:center; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .jar{ animation:none; }
+    .jar-shadow{ animation:none; }
+    .cta-button::after{ animation:none; }
+    .reveal, .reveal-stagger > *{ transition:none; opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">🚚 Garantia de resultados ou seu dinheiro de volta &nbsp;·&nbsp; <strong>Frete grátis para todo o Brasil</strong></div>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <div class="eyebrow reveal">Novidade no Brasil</div>
+    <h1 class="reveal">Ganhe massa muscular <em>de forma mais rápida</em> — mesmo que você já tenha tentado de tudo</h1>
+    <p class="sub reveal">A fórmula que está fazendo academias inteiras comentarem. Resultados perceptíveis a partir da 2ª–3ª semana de uso.</p>
+
+    <div class="stage reveal">
+      <div>
+        <div class="jar">
+          <div class="cap"></div>
+          <div class="face f1"><span>GHDROL</span><small>90 CÁPSULAS</small></div>
+          <div class="face f2"><span>GHDROL</span><small>90 CÁPSULAS</small></div>
+          <div class="face f3"><span>GHDROL</span><small>90 CÁPSULAS</small></div>
+          <div class="face f4"><span>GHDROL</span><small>90 CÁPSULAS</small></div>
+        </div>
+        <div class="jar-shadow"></div>
+      </div>
+    </div>
+    <p class="photo-note">[Elemento 3D ilustrativo — substituir por render 3D real do produto ou foto fotografada em estúdio para a versão final]</p>
+
+    <a href="#oferta" class="cta-button">QUERO MEU GHDROL COM DESCONTO →</a>
+    <div class="cta-sub">Compra 100% segura · Garantia de 60 dias</div>
+
+    <div class="trust-row" style="margin-top:30px;">
+      <span><span class="dot">✓</span> Garantia de 60 dias</span>
+      <span><span class="dot">✓</span> Frete grátis</span>
+      <span><span class="dot">✓</span> +[X mil] potes vendidos</span>
+    </div>
+
+    <div class="stars">★★★★★</div>
+    <div class="rating-note">[4,8/5 — baseado em X avaliações reais de clientes]</div>
+  </div>
+</section>
+
+<!-- COUNTERS -->
+<section style="padding-top:0; border-top:none;">
+  <div class="wrap">
+    <div class="counters reveal-stagger">
+      <div class="counter-card">
+        <div class="counter-num" data-target="12000" data-suffix="+">0</div>
+        <div class="counter-label">Potes entregues no Brasil</div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-num" data-target="98" data-suffix="%">0</div>
+        <div class="counter-label">Recomendariam o produto</div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-num" data-target="60" data-suffix=" dias">0</div>
+        <div class="counter-label">De garantia incondicional</div>
+      </div>
+    </div>
+    <div class="editor-note reveal">✏️ Os números acima (12.000+ potes, 98%) são ilustrativos — substituir pelos números reais de vendas e satisfação de vocês antes de publicar.</div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title reveal">Você treina pesado. Come certo. Dorme as horas que consegue.<br>E mesmo assim...</h2>
+    <ul class="pain-list reveal-stagger">
+      <li>O espelho não mostra a evolução que o esforço merece</li>
+      <li>Você vê outras pessoas evoluindo mais rápido com o mesmo treino</li>
+      <li>A recuperação entre os treinos está cada vez mais lenta</li>
+      <li>Já gastou dinheiro com suplemento que prometeu muito e entregou pouco</li>
+    </ul>
+    <p class="pain-callout reveal">Se isso soa familiar, o problema raramente é falta de esforço.<br><strong>É falta de suporte certo para o seu corpo trabalhar no estado anabólico ideal.</strong></p>
+  </div>
+</section>
+
+<!-- MECANISMO -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title reveal">Apresentamos o Ghdrol</h2>
+    <div class="editor-note reveal">
+      ✏️ <strong>Nota para edição:</strong> os 3 pilares abaixo precisam ser preenchidos com os ativos reais da fórmula (conforme rótulo) e sua função comprovada.
+    </div>
+    <div class="placeholder-inline reveal">[CONFIRMAR COM RÓTULO: ativos reais + função de cada um]</div>
+    <div class="pillars reveal-stagger">
+      <div class="pillar">
+        <div class="n">01</div>
+        <h3>Suporte ao estado anabólico</h3>
+        <p>Auxilia o corpo a direcionar energia para construção muscular.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">02</div>
+        <h3>Recuperação acelerada</h3>
+        <p>Menos tempo dolorido, mais frequência de treino.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">03</div>
+        <h3>Força e disposição</h3>
+        <p>Mais carga no treino, mais energia no dia a dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title reveal">O que dizem nossos clientes</h2>
+    <div class="testi-grid reveal-stagger">
+      <div class="testi-card">
+        [DEPOIMENTO REAL #1 — texto completo do cliente]
+        <div class="who">— Nome/iniciais, cidade (se autorizado)</div>
+      </div>
+      <div class="testi-card">
+        [DEPOIMENTO REAL #2]
+        <div class="who">— Nome/iniciais</div>
+      </div>
+      <div class="testi-card">
+        [DEPOIMENTO REAL #3]
+        <div class="who">— Nome/iniciais</div>
+      </div>
+    </div>
+    <div class="print-grid reveal-stagger">
+      <div class="placeholder-inline">[PRINT WHATSAPP #1]</div>
+      <div class="placeholder-inline">[PRINT WHATSAPP #2]</div>
+      <div class="placeholder-inline">[PRINT WHATSAPP #3]</div>
+      <div class="placeholder-inline">[PRINT WHATSAPP #4]</div>
+      <div class="placeholder-inline">[PRINT WHATSAPP #5]</div>
+      <div class="placeholder-inline">[PRINT WHATSAPP #6]</div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section id="oferta">
+  <div class="wrap">
+    <h2 class="section-title reveal">Escolha seu kit</h2>
+
+    <div class="countdown-bar reveal">
+      ⏳ Esta condição especial encerra em <b id="countdown">00:00:00</b>
+    </div>
+    <div class="editor-note reveal">✏️ Contador acima é um gatilho de urgência. Só use se a condição realmente expirar/renovar de fato (ex: cupom diário real) — timer falso que nunca zera é prática enganosa.</div>
+
+    <div class="pricing-grid reveal-stagger">
+      <div class="price-card">
+        <div class="qty">1 pote · 90 cápsulas</div>
+        <div class="price">R$ 147,90</div>
+        <div class="save">Frete grátis</div>
+        <a href="#" class="mini-cta">Selecionar</a>
+      </div>
+      <div class="price-card">
+        <div class="qty">2 potes</div>
+        <div class="price">R$ 237,90</div>
+        <div class="save">Frete grátis + desconto</div>
+        <a href="#" class="mini-cta">Selecionar</a>
+      </div>
+      <div class="price-card featured">
+        <div class="badge">Mais vendido</div>
+        <div class="qty">3 potes</div>
+        <div class="price">R$ 317,90</div>
+        <div class="save">Maior desconto</div>
+        <a href="#" class="mini-cta">Selecionar</a>
+      </div>
+      <div class="price-card">
+        <div class="qty">5 potes</div>
+        <div class="price">R$ 447,90</div>
+        <div class="save">Máximo desconto</div>
+        <a href="#" class="mini-cta">Selecionar</a>
+      </div>
+    </div>
+    <p class="scarcity-note reveal">[USAR SOMENTE SE REAL] Estoque sujeito à disponibilidade — produção em lotes controlados.</p>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section>
+  <div class="wrap">
+    <div class="guarantee reveal">
+      <div class="seal">60</div>
+      <h3>Risco zero para você</h3>
+      <p>Se em até 60 dias você não notar os resultados esperados, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title reveal">Perguntas frequentes</h2>
+
+    <div class="faq-item">
+      <button class="faq-q">O Ghdrol tem efeitos colaterais?</button>
+      <div class="faq-a">
+        <p class="placeholder-inline">[CONFIRMAR COM RÓTULO: responder com base na bula real. Sugestão: "Os ativos utilizados são amplamente estudados quanto à segurança. Como qualquer suplemento, recomendamos consultar um profissional de saúde antes do uso, especialmente se você tiver alguma condição pré-existente."]</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Em quanto tempo vejo resultado?</button>
+      <div class="faq-a"><p>Os primeiros sinais costumam aparecer entre a 2ª e 3ª semana de uso contínuo, com resultados mais expressivos a partir de 8 semanas.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Como tomo o Ghdrol?</button>
+      <div class="faq-a"><p>3 cápsulas por dia, pela manhã ou à tarde.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">É seguro comprar pelo site?</button>
+      <div class="faq-a"><p>Sim, compra 100% segura via Shopify, com proteção de dados e garantia de satisfação de 60 dias.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Funciona para iniciantes?</button>
+      <div class="faq-a"><p>Sim, o produto é indicado tanto para quem está começando quanto para quem já treina há mais tempo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section style="border-top:none; padding-top:0;">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <h2>Pare de treinar sem o suporte que seu corpo precisa</h2>
+      <a href="#oferta" class="cta-button">QUERO MEU GHDROL AGORA →</a>
+      <div class="trust-row" style="margin-top:24px;">
+        <span><span class="dot">✓</span> Garantia de 60 dias</span>
+        <span><span class="dot">✓</span> Frete grátis</span>
+        <span><span class="dot">✓</span> Pagamento seguro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Laboratório Ghmuscle · Resultados individuais podem variar. Consulte um profissional de saúde antes de iniciar o uso de qualquer suplemento alimentar.
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="info">Ghdrol — 90 cápsulas<b>3 potes a partir de R$ 105,96/un.</b></div>
+  <a href="#oferta">Ver oferta →</a>
+</div>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.15 });
+  document.querySelectorAll('.reveal, .reveal-stagger, .guarantee').forEach(el=>io.observe(el));
+
+  // Animated counters
+  const counterIo = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        function tick(now){
+          const p = Math.min((now-start)/duration, 1);
+          const eased = 1 - Math.pow(1-p, 3);
+          el.textContent = Math.floor(eased*target).toLocaleString('pt-BR') + suffix;
+          if(p<1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterIo.unobserve(el);
+      }
+    });
+  }, { threshold:.5 });
+  document.querySelectorAll('.counter-num').forEach(el=>counterIo.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Sticky CTA after hero
+  const stickyCta = document.getElementById('stickyCta');
+  const heroSection = document.querySelector('.hero');
+  const stickyIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ stickyCta.classList.toggle('show', !e.isIntersecting); });
+  }, { threshold:0 });
+  stickyIo.observe(heroSection);
+
+  // Countdown (resets daily at midnight — placeholder logic, wire to real promo end date)
+  function updateCountdown(){
+    const now = new Date();
+    const end = new Date(now);
+    end.setHours(23,59,59,999);
+    let diff = Math.max(0, end - now);
+    const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+    const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    document.getElementById('countdown').textContent = `${h}:${m}:${s}`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
